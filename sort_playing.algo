@@ -1,0 +1,93 @@
+
+FUNCTION size_Tab () : INTEGER
+VAR
+    n:INTEGER;
+BEGIN
+    REPEAT
+        Write ("Enter the size of the table" : );
+        Read (n);
+    UNTIL (n>0) 
+    return n;
+END
+
+PROCEDURE read_array (n:INTEGER, VAR tab: ARRAY_OF INTEGER)
+VAR
+    i: INTEGER;
+BEGIN
+    FOR i FROM 0 TO n-1 DO 
+         Write ("Enter the element" ,i, "of the table ": );
+         Read (T[i]);    
+    END_FOR
+END
+
+
+PROCEDURE swap(VAR xp, VAR yp : INTEGER)
+VAR
+   tmp : INTEGER;
+BEGIN
+  tmp := xp;
+  xp := yp;
+  yp := tmp;
+END
+
+
+PROCEDURE bubble_sort(VAR tab : ARRAY_OF INTEGER)
+VAR
+   i,j,n : INTEGER;
+BEGIN
+   n := tab.length;
+   FOR i FROM 0 TO n- 1 STEP 1  DO
+       // Last i elements are already in place
+       FOR j  FROM 0 TO n-i-1 STEP 1  DO
+           IF (tab[j] > tab[j+1]) THEN
+               swap(tab[j], tab[j+1])
+           END_IF
+       END_FOR
+   END_FOR
+END
+
+
+PROCEDURE card_sort(VAR tab : ARRAY_OF INTEGER,card :INTEGER)
+VAR
+   i,j : INTEGER;
+BEGIN
+  j := 0;
+  WHILE (j< tab.length) DO
+   IF ( card<tab[j]) THEN
+    FOR i FROM tab.length TO j+1 STEP -1  DO
+        tab[i]:=tab[i-1];
+    END_FOR
+    
+    break;
+   END_IF
+   j := j+1;  
+  END_WHILE
+  tab[j]:=card; 
+END
+
+
+ALGORITHM Insertion_sort
+VAR
+    tab: ARRAY_OF INTEGER ;
+    card,n,i:INTEGER;
+    
+    
+BEGIN
+
+
+    n:= size_Tab (); 
+
+   read_array(n,tab);   
+
+   bubble_sort(tab);
+   read(n) ;
+   i:=1;
+   WHILE (i<=n) DO
+       READ(card);
+       card_sort(tab,card);
+   END_WHILE
+  
+END
+
+
+
